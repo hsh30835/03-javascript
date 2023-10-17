@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>01. 어트리 뷰트</h1>
+    <pre>
+        Element.prototype.attributes 프로퍼티로 모든 어트리뷰트 노드를 취득 할 수 있다.
+        Attributes 프로퍼티는 getter만 존재하는 읽기 전용 접근자로 프로퍼티로 NameNodeMap 객체를 반환한다.
+    </pre>
+
+    <label for="username">유저명</label>
+    <input type="text" id="username" value="user01"/>
+
+    <script>
+        const {attributes} = document.getElementById("username");
+
+        console.log(attributes); //attributes의 속성
+        console.log(attributes.id.value);  //attributes의 id속성의 value 값
+        console.log(attributes.value.value); //attributes의 value속성의 value 값
+        console.log("----------------")
+    </script>
+
+    <pre>
+        Element.prototype.getAttribute/setAttributes 메서드를 사용하면 attributes 프로퍼티를
+        통하지 않고 요소 노드에서 메서드를 통해 직접 html 어트리뷰트의 값을 취득하거나 변경할 수 있다.
+    </pre>
+    <script>
+        let $input = document.getElementById("username"); //<input type="text" id="username" value="user01"/>에서 가져옴
+
+        const inputValue = $input.getAttribute("value"); /*get:value속성을 취득함*/
+        console.log(inputValue);
+
+        $input.setAttribute("value", "user02"); /*set:객체의 값을 value에서 user02로 조작함*/
+        /*let $input = document.getElementById("username");은 이미 실행됐기에
+        다시 새롭게 선언해야한다*/
+        $input = document.getElementById("username");
+        console.log($input.getAttribute("value"));
+        console.log("-----------------")
+    </script>
+
+    <pre>
+        Element.prototype.hasAttribute(attributeName) 메서드를 사용하면 특정
+        html 어트리뷰트가 존재하는지 확인할 수 있다.
+        Element.prototype.removeAttribute(attributeName) 메서드를 사용하면 특정 html
+        어트리뷰트를 삭제할 수 있다.
+    </pre>
+    <lable for="nickname">닉네임</lable>
+    <input type="text" id="nickname" value="JsMaster"/>
+    <script>
+        const $nickname = document.getElementById("nickname");
+        //속성을 가지고 있는지 확인
+        console.log($nickname.hasAttribute("name"));
+        //name 속성이 없어서 false가 나옴
+
+        if($nickname.hasAttribute("value")){ //value속성이 있으니깐 true나옴
+            $nickname.removeAttribute("value"); //if($nickname.hasAttribute("value"))가 참이라서 실행됨
+        }
+        console.log($nickname.hasAttribute("value")); //출력
+        
+    </script>
+</body>
+</html>
